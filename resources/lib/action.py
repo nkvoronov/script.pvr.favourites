@@ -90,7 +90,7 @@ class Main:
 
 def ShowDialog(vRadio, vProperty):
     try:
-        dlg = gui.SelectChannels('DialogSelectPVRChannels.xml',xbmcaddon.Addon().getAddonInfo('path').decode('utf-8'), 'Default', '1080i', isradio=vRadio, property=vProperty)
+        dlg = gui.SelectChannels('DialogSelect.xml',xbmcaddon.Addon().getAddonInfo('path').decode('utf-8'), isradio=vRadio, property=vProperty)
         dlg.doModal()
         del dlg
     except Exception, e:

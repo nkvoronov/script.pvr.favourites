@@ -1,6 +1,6 @@
 # Kodi Media Center language file
-# Addon Name: Select PVR channels
-# Addon id: script.pvrchannels.select
+# Addon Name: PVR favourites
+# Addon id: script.pvr.favourites
 # Addon Provider: YLLOW_DRAGON
 msgid ""
 msgstr ""
@@ -16,18 +16,18 @@ msgstr ""
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgctxt "#34209"
+msgctxt "#32000"
 msgid "TV Channels"
 msgstr ""
 
-msgctxt "#34210"
+msgctxt "#32001"
 msgid "Radio Channels"
 msgstr ""
 
-msgctxt "#34211"
+msgctxt "#32002"
 msgid "No"
 msgstr ""
 
-msgctxt "#34212"
+msgctxt "#32003"
 msgid "(Clear the current setting)"
 msgstr ""

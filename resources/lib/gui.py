@@ -14,23 +14,38 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
             xbmcgui.WindowXMLDialog.__init__(self)
             self.isRadio = kwargs.get("isradio")
             self.SkinPropery = kwargs.get("property")
+            
             self.C_MAIN_HEADER=1
-            self.C_MAIN_LIST=6
-            self.C_MAIN_CANCEL_BUTTON=7
+            self.C_MAIN_LIST1=3
+            self.C_MAIN_LIST2=6
+            self.C_MAIN_OK_BUTTON=5
+            self.C_MAIN_CANCEL_BUTTON1=7
+            self.C_MAIN_CANCEL_BUTTON2=99
+            
             self.DBC = db.DBChannels()
         except Exception, e:
             common.dbg_log('SelectChannels::__init__', 'ERROR: (' + repr(e) + ')', common.logErorr)
     
     def onInit(self):
         try:
-            self.getControl(self.C_MAIN_HEADER).setLabel(common.Lang(34209+int(self.isRadio)))
-            lstItem = xbmcgui.ListItem(common.Lang(34211))
-            lstItem.setLabel2(common.Lang(34212))
+            try:
+                self.ChannelList = self.getControl(self.C_MAIN_LIST2)
+                self.getControl(self.C_MAIN_LIST1).setVisible(False)
+            except:
+                print_exc()
+                self.ChannelList = self.getControl(self.C_MAIN_LIST1)
+                
+            self.getControl(self.C_MAIN_HEADER).setLabel(common.Lang(32000+int(self.isRadio)))
+            self.getControl(self.C_MAIN_OK_BUTTON).setVisible(False)
+            
+            lstItem = xbmcgui.ListItem(common.Lang(32002))
+            lstItem.setLabel2(common.Lang(32003))
             lstItem.setIconImage("DefaultAddonNone.png")
             lstItem.setProperty('IconPath','')
             lstItem.setProperty('ClientId','')
             lstItem.setProperty('UniqueId','')
-            self.getControl(self.C_MAIN_LIST).addItem(lstItem)
+            self.ChannelList.addItem(lstItem)
+            
             DBdata = self.DBC.get_channels_list(self.isRadio)
             if DBdata:
                 for row in DBdata:
@@ -40,8 +55,10 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
                     lstItem.setProperty('IconPath',row[2].encode('utf-8'))
                     lstItem.setProperty('ClientId',str(row[3]))
                     lstItem.setProperty('UniqueId',str(row[4]))
-                    self.getControl(self.C_MAIN_LIST).addItem(lstItem)
-            self.getControl(self.C_MAIN_LIST).selectItem(0)
+                    self.ChannelList.addItem(lstItem)
+                    
+            self.ChannelList.selectItem(0)
+            
         except Exception, e:
             common.dbg_log('SelectChannels::onInit', 'ERROR: (' + repr(e) + ')', common.logErorr) 
 
@@ -54,8 +71,8 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
 
     def onClick(self, controlID):
         try:
-            if controlID == self.C_MAIN_LIST:
-                selectedPos = self.getControl(controlID).getSelectedPosition()
+            if controlID == self.C_MAIN_LIST1 or controlID == self.C_MAIN_LIST2:
+                selectedPos = self.ChannelList.getSelectedPosition()
                 if selectedPos > 0:
                     selectedItem = self.getControl(controlID).getSelectedItem()
                     strChannelName = selectedItem.getLabel()
@@ -82,8 +99,9 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
                     xbmc.sleep(300)
                     self.close()
                     
-            if controlID == self.C_MAIN_CANCEL_BUTTON:
+            if controlID == self.C_MAIN_CANCEL_BUTTON1 or controlID == self.C_MAIN_CANCEL_BUTTON2:
                 self.close()
+                
         except Exception, e:
             common.dbg_log('SelectChannels::onClick', 'ERROR: (' + repr(e) + ')', common.logErorr)  
 
