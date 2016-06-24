@@ -57,7 +57,7 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
                     lstItem.setProperty('UniqueId',str(row[4]))
                     self.ChannelList.addItem(lstItem)
                     
-            self.ChannelList.selectItem(0)
+            self.setFocus(self.ChannelList)
             
         except Exception, e:
             common.dbg_log('SelectChannels::onInit', 'ERROR: (' + repr(e) + ')', common.logErorr) 
