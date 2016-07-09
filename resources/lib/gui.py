@@ -40,10 +40,11 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
             
             lstItem = xbmcgui.ListItem(common.Lang(32002))
             lstItem.setLabel2(common.Lang(32003))
-            lstItem.setIconImage("DefaultAddonNone.png")
+            lstItem.setIconImage('DefaultAddonNone.png')
             lstItem.setProperty('IconPath','')
             lstItem.setProperty('ClientId','')
             lstItem.setProperty('UniqueId','')
+            lstItem.setProperty('Addon.Summary',common.Lang(32003))
             self.ChannelList.addItem(lstItem)
             
             DBdata = self.DBC.get_channels_list(self.isRadio)
@@ -55,6 +56,7 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
                     lstItem.setProperty('IconPath',row[2].encode('utf-8'))
                     lstItem.setProperty('ClientId',str(row[3]))
                     lstItem.setProperty('UniqueId',str(row[4]))
+                    lstItem.setProperty('Addon.Summary',str(row[1]))
                     self.ChannelList.addItem(lstItem)
                     
             self.setFocus(self.ChannelList)
