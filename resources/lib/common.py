@@ -44,11 +44,11 @@ def json_response(vJsonQuery):
 
 def get_channels_json_response(vIsRadio):
     if str(vIsRadio) == '0':
-        JsonQuery = '{ "jsonrpc": "2.0", "id": 0, "method": "PVR.GetChannels", "params": { "channelgroupid": "alltv", "properties": ["uniqueid", "channelnumber", "thumbnail", "channeltype", "hidden", "locked",  "lastplayed"] } }'
+        JsonQuery = '{ "jsonrpc": "2.0", "id": 0, "method": "PVR.GetChannels", "params": { "channelgroupid": "alltv", "properties": [ "thumbnail", "channeltype", "hidden", "locked",  "lastplayed" ] } }'
     else:
-        JsonQuery = '{ "jsonrpc": "2.0", "id": 0, "method": "PVR.GetChannels", "params": { "channelgroupid": "allradio", "properties": ["uniqueid", "channelnumber", "thumbnail", "channeltype", "hidden", "locked",  "lastplayed"] } }'
+        JsonQuery = '{ "jsonrpc": "2.0", "id": 0, "method": "PVR.GetChannels", "params": { "channelgroupid": "allradio", "properties": [ "thumbnail", "channeltype", "hidden", "locked",  "lastplayed" ] } }'
     return json_response(JsonQuery)
 
 def get_channel_details_json_response(vChannelID):
-    JsonQuery = '{"jsonrpc": "2.0", "id": 0, "method": "PVR.GetChannelDetails", "params": {"channelid": ' + vChannelID + ', "properties" :["broadcastnow"]} }'
+    JsonQuery = '{ "jsonrpc": "2.0", "id": 0, "method": "PVR.GetChannelDetails", "params": { "channelid": ' + vChannelID + ', "properties" : [ "broadcastnow" ] } }'
     return json_response(JsonQuery) 

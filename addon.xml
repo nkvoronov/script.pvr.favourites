@@ -2,7 +2,7 @@
 <addon
     id="script.pvr.favourites"
     name="PVR favourites"
-    version="2.0.7"
+    version="2.0.8"
     provider-name="YLLOW_DRAGON">
     <requires>
         <import addon="xbmc.python" version="2.20.0"/>

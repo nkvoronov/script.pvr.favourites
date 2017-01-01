@@ -39,9 +39,8 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
             lstItem = xbmcgui.ListItem(common.Lang(32002))
             lstItem.setLabel2(common.Lang(32003))
             lstItem.setIconImage('DefaultAddonNone.png')
-            lstItem.setProperty('IconPath','')
+            lstItem.setProperty('Thumbnail','')
             lstItem.setProperty('ChannelId','')
-            lstItem.setProperty('UniqueId','')
             lstItem.setProperty('Addon.Summary',common.Lang(32003))
             self.ChannelList.addItem(lstItem)
 
@@ -52,9 +51,8 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
                     lstItem = xbmcgui.ListItem(item['label'])
                     lstItem.setLabel2(item['channeltype'])
                     lstItem.setIconImage(item['thumbnail'])
-                    lstItem.setProperty('IconPath',item['thumbnail'])
+                    lstItem.setProperty('Thumbnail',item['thumbnail'])
                     lstItem.setProperty('ChannelId',str(item['channelid']))
-                    lstItem.setProperty('UniqueId',str(item['uniqueid']))
                     lstItem.setProperty('Addon.Summary',item['channeltype'])
                     self.ChannelList.addItem(lstItem)
 
@@ -77,19 +75,16 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
                 if selectedPos > 0:
                     selectedItem = self.getControl(controlID).getSelectedItem()
                     strChannelName = selectedItem.getLabel()
-                    strIconPath = selectedItem.getProperty('IconPath')
+                    strThumbnail = selectedItem.getProperty('Thumbnail')
                     strChannelId = selectedItem.getProperty('ChannelId')
-                    strUniqueId = selectedItem.getProperty('UniqueId')
 
                     xbmc.executebuiltin('Skin.SetString(%s,%s)' % ('%s.%s' % (self.SkinPropery, "ChannelId",), strChannelId,))
-                    xbmc.executebuiltin('Skin.SetString(%s,%s)' % ('%s.%s' % (self.SkinPropery, "UniqueId",), strUniqueId,))
                     xbmc.executebuiltin('Skin.SetString(%s,%s)' % ('%s.%s' % (self.SkinPropery, "Label",), strChannelName,))
-                    xbmc.executebuiltin('Skin.SetString(%s,%s)' % ('%s.%s' % (self.SkinPropery, "Icon",), strIconPath,))
+                    xbmc.executebuiltin('Skin.SetString(%s,%s)' % ('%s.%s' % (self.SkinPropery, "Icon",), strThumbnail,))
                     xbmc.sleep(300)
                     self.close()
                 else:
                     xbmc.executebuiltin('Skin.Reset(%s)' % '%s.%s' % (self.SkinPropery, "ChannelId",))
-                    xbmc.executebuiltin('Skin.Reset(%s)' % '%s.%s' % (self.SkinPropery, "UniqueId",))
                     xbmc.executebuiltin('Skin.Reset(%s)' % '%s.%s' % (self.SkinPropery, "Label",))
                     xbmc.executebuiltin('Skin.Reset(%s)' % '%s.%s' % (self.SkinPropery, "Icon",))
                     xbmc.sleep(300)

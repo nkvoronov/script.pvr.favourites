@@ -55,7 +55,7 @@ class Main:
 
     def _play_channels(self, vChannelID):
         try:
-             xbmc.executeJSONRPC('{ "jsonrpc": "2.0", "id": 0, "method": "Player.Open", "params": { "item": {"channelid": ' + vChannelID + '} } }')
+             xbmc.executeJSONRPC('{ "jsonrpc": "2.0", "id": 0, "method": "Player.Open", "params": { "item": { "channelid": ' + vChannelID + ' } } }')
         except Exception, e:
             common.dbg_log('Main::_play_channels', 'ERROR: (' + repr(e) + ')', common.logErorr)
 
@@ -95,7 +95,7 @@ class Main:
 
                     channel_details = common.get_channel_details_json_response(value)
 
-                    if channel_details.has_key('result') and channel_details['result'].has_key('channeldetails') and channel_details['result']['channeldetails']['broadcastnow'] is not None:
+                    if channel_details.has_key('result') and channel_details['result'].has_key('channeldetails') and channel_details['result']['channeldetails'].has_key('broadcastnow') and channel_details['result']['channeldetails']['broadcastnow'] is not None:
                         strTitle = channel_details['result']['channeldetails']['broadcastnow']['title']
                         strStartTime = self._get_strTime(channel_details['result']['channeldetails']['broadcastnow']['starttime'])
                         strEndTime = self._get_strTime(channel_details['result']['channeldetails']['broadcastnow']['endtime'])
