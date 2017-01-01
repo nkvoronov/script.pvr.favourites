@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 import os
 import sys
@@ -6,6 +6,11 @@ import locale
 import xbmc
 import xbmcaddon
 import xbmcgui
+
+if sys.version_info < (2, 7):
+    import simplejson
+else:
+    import json as simplejson
 
 __author__ = 'YLLOW_DRAGON'
 __scriptname__ = 'PVR favourites'
@@ -19,10 +24,6 @@ __resources_lib__ = xbmc.translatePath(os.path.join(__resources__, 'lib'))
 debug = 'true'
 logErorr = xbmc.LOGERROR
 
-NAME_TVDB = 'TV29.db'
-NAME_ADDONSDB = 'Addons20.db'  
-NAME_EPGDB = 'Epg11.db'
-
 sys.path.append(__resources_lib__)
 encoding = locale.getpreferredencoding(do_setlocale=True)
 reload(sys)
@@ -30,8 +31,24 @@ sys.setdefaultencoding(encoding)
 
 def Lang(vcode):
     return __addon__.getLocalizedString(vcode)
-    
+
 def dbg_log(vsource, vtext, vlevel=xbmc.LOGNOTICE):
     if debug == 'false':
         return
     xbmc.log('## '+__scriptname__+' ## ' + vsource + ' ## ' + vtext, vlevel)
+
+def json_response(vJsonQuery):
+    json_query = xbmc.executeJSONRPC(vJsonQuery)
+    json_query = unicode(json_query, 'utf-8', errors='ignore')
+    return simplejson.loads(json_query)
+
+def get_channels_json_response(vIsRadio):
+    if str(vIsRadio) == '0':
+        JsonQuery = '{ "jsonrpc": "2.0", "id": 0, "method": "PVR.GetChannels", "params": { "channelgroupid": "alltv", "properties": [ "thumbnail", "channeltype", "hidden", "locked",  "lastplayed" ] } }'
+    else:
+        JsonQuery = '{ "jsonrpc": "2.0", "id": 0, "method": "PVR.GetChannels", "params": { "channelgroupid": "allradio", "properties": [ "thumbnail", "channeltype", "hidden", "locked",  "lastplayed" ] } }'
+    return json_response(JsonQuery)
+
+def get_channel_details_json_response(vChannelID):
+    JsonQuery = '{ "jsonrpc": "2.0", "id": 0, "method": "PVR.GetChannelDetails", "params": { "channelid": ' + vChannelID + ', "properties" : [ "broadcastnow" ] } }'
+    return json_response(JsonQuery) 
