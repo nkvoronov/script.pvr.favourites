@@ -31,3 +31,7 @@ msgstr "Нет"
 msgctxt "#32003"
 msgid "(Clear the current setting)"
 msgstr "(Очистить текущие настройки)"
+
+msgctxt "#32004"
+msgid "Cancel"
+msgstr "Отмена"

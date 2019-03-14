@@ -31,3 +31,7 @@ msgstr ""
 msgctxt "#32003"
 msgid "(Clear the current setting)"
 msgstr ""
+
+msgctxt "#32004"
+msgid "Cancel"
+msgstr ""

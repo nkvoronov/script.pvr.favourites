@@ -34,6 +34,7 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
                 self.ChannelList = self.getControl(self.C_MAIN_LIST1)
 
             self.getControl(self.C_MAIN_HEADER).setLabel(common.Lang(32000+int(self.isRadio)))
+            self.getControl(self.C_MAIN_CANCEL_BUTTON1).setLabel(common.Lang(32004))
             self.getControl(self.C_MAIN_OK_BUTTON).setVisible(False)
 
             lstItem = xbmcgui.ListItem(common.Lang(32002))
