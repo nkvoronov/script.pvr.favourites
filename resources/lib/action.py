@@ -59,49 +59,24 @@ class Main:
         except Exception, e:
             common.dbg_log('Main::_play_channels', 'ERROR: (' + repr(e) + ')', common.logErorr)
 
-    def _get_strTime(self, vDTstr):
-        try:
-            try:
-                utcDate = datetime.strptime(vDTstr, '%Y-%m-%d %H:%M:%S')
-            except TypeError:
-                utcDate = datetime(*(time.strptime(vDTstr, '%Y-%m-%d %H:%M:%S')[0:6]))
-
-            epoch = time.mktime(utcDate.timetuple())
-            offset = datetime.fromtimestamp(epoch) - datetime.utcfromtimestamp(epoch)
-
-            localDate = utcDate + offset
-
-            timeStr = localDate.strftime('%H:%M')
-            if timeStr[0] == '0':
-                timeStr = timeStr[1:]
-            return timeStr
-        except Exception, e:
-            common.dbg_log('Main::_get_strTime', 'ERROR: (' + repr(e) + ')', common.logErorr)
-
     def _set_properties(self, listing):
         try:
             self.WINDOW = xbmcgui.Window(10000)
             for count, setting in enumerate(listing):
-                name = setting.attributes[ 'id' ].nodeValue
+                name = setting.attributes[ 'id' ].nodeValue.lower()
                 aname = name.split('.')
                 try:
                     value = setting.childNodes [ 0 ].nodeValue
                 except:
                     value = ""
-                if name.startswith('Channel') and name.endswith('.ChannelId') and value:
+                if name.startswith('channel') and name.endswith('.channelid') and value:
                     strTitle = ''
-                    strStartTime = xbmc.getInfoLabel('System.Time(h:mm)')
-                    strEndTime = xbmc.getInfoLabel('System.Time(h:mm)')
 
                     channel_details = common.get_channel_details_json_response(value)
 
                     if channel_details.has_key('result') and channel_details['result'].has_key('channeldetails') and channel_details['result']['channeldetails'].has_key('broadcastnow') and channel_details['result']['channeldetails']['broadcastnow'] is not None:
                         strTitle = channel_details['result']['channeldetails']['broadcastnow']['title']
-                        strStartTime = self._get_strTime(channel_details['result']['channeldetails']['broadcastnow']['starttime'])
-                        strEndTime = self._get_strTime(channel_details['result']['channeldetails']['broadcastnow']['endtime'])
 
-                    self.WINDOW.setProperty(aname[0]+'.'+aname[1]+'.StartTime' , strStartTime)
-                    self.WINDOW.setProperty(aname[0]+'.'+aname[1]+'.EndTime' , strEndTime)
                     self.WINDOW.setProperty(aname[0]+'.'+aname[1]+'.Title' , strTitle)
         except Exception, e:
             common.dbg_log('Main::_set_properties', 'ERROR: (' + repr(e) + ')', common.logErorr)

@@ -50,9 +50,16 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
             if channels_list.has_key('result') and channels_list['result'].has_key('channels') and channels_list['result']['channels'] is not None:
                 for item in channels_list['result']['channels']:
                     lstItem = xbmcgui.ListItem(item['label'])
-                    lstItem.setLabel2(item['channeltype'])
-                    lstItem.setIconImage(item['thumbnail'])
-                    lstItem.setProperty('Thumbnail',item['thumbnail'])
+                    if item['channeltype'] == 'tv':
+                        lstItem.setLabel2(common.Lang(32005))
+                    else:
+                        lstItem.setLabel2(common.Lang(32006))
+                    if item['thumbnail']:
+                        lstItem.setIconImage(item['thumbnail'])
+                        lstItem.setProperty('Thumbnail',item['thumbnail'])
+                    else:
+                        lstItem.setIconImage('DefaultTVShows.png')
+                        lstItem.setProperty('Thumbnail','DefaultTVShows.png')
                     lstItem.setProperty('ChannelId',str(item['channelid']))
                     lstItem.setProperty('Addon.Summary',item['channeltype'])
                     self.ChannelList.addItem(lstItem)

@@ -35,3 +35,12 @@ msgstr "(Очистить текущие настройки)"
 msgctxt "#32004"
 msgid "Cancel"
 msgstr "Отмена"
+
+msgctxt "#32005"
+msgid "TV"
+msgstr "ТВ"
+
+msgctxt "#32006"
+msgid "Radio"
+msgstr "Радио"
+
