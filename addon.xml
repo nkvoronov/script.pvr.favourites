@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon
-    id="script.pvr.favourites"
-    name="PVR favourites"
-    version="2.1.1"
-    provider-name="YLLOW_DRAGON">
-    <requires>
-        <import addon="xbmc.python" version="2.20.0"/>
-        <import addon="script.module.simplejson" version="3.3.0"/>
-        <import addon="script.module.unidecode" version="0.4.14"/>
-    </requires>
-    <extension point="xbmc.python.library" library="default.py"/>
-    <extension point="xbmc.addon.metadata">
-        <description lang="en">It gets information about PVR channels and displays additional buttons and widgets on the main menu and submenus.</description>
-        <disclaimer lang="en">Skins support needed for correct display.</disclaimer>
-        <description lang="ru">Получает информацию об PVR каналах и отображает дополнительные кнопки и виджеты в главном меню и подменю.</description>
-        <disclaimer lang="ru">Необходима поддержка скинов для корректного отображения.</disclaimer>
-        <platform>all</platform>
-        <email>nkvoronov@gmail.com</email>
-        <source>https://github.com/nkvoronov/script.pvr.favourites.git</source>
-    </extension>
+	id="script.pvr.favourites"
+	name="PVR favourites"
+	version="2.1.2"
+	provider-name="YLLOW_DRAGON">
+	<requires>
+		<import addon="xbmc.python" version="2.20.0"/>
+		<import addon="script.module.simplejson" version="3.3.0"/>
+		<import addon="script.module.unidecode" version="0.4.14"/>
+	</requires>
+	<extension point="xbmc.python.library" library="default.py"/>
+	<extension point="xbmc.addon.metadata">
+		<description lang="en_GB">It gets information about PVR channels and displays additional buttons and widgets on the main menu and submenus.</description>
+		<description lang="ru_RU">Получает информацию об PVR каналах и отображает дополнительные кнопки и виджеты в главном меню и подменю.</description>
+		<description lang="uk_UA">Отримує інформацію про PVR каналах і відображає додаткові кнопки і віджети в головному меню і підміню.</description>
+		<disclaimer lang="en_GB">Skins support needed for correct display.</disclaimer>
+		<disclaimer lang="ru_RU">Необходима поддержка скинов для корректного отображения.</disclaimer>
+		<disclaimer lang="uk_UA">Необхідна підтримка скінів для коректного відображення.</disclaimer>
+		<platform>all</platform>
+		<email>nkvoronov@gmail.com</email>
+		<source>https://github.com/nkvoronov/script.pvr.favourites.git</source>
+	</extension>
 </addon>
