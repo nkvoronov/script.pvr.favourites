@@ -25,8 +25,6 @@ logErorr = xbmc.LOGERROR
 
 sys.path.append(__resources_lib__)
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 def Lang(vcode):
     return __addon__.getLocalizedString(vcode)
@@ -38,7 +36,6 @@ def dbg_log(vsource, vtext, vlevel=xbmc.LOGNOTICE):
 
 def json_response(vJsonQuery):
     json_query = xbmc.executeJSONRPC(vJsonQuery)
-    json_query = unicode(json_query, 'utf-8', errors='ignore')
     return simplejson.loads(json_query)
 
 def get_channels_json_response(vIsRadio):

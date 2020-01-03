@@ -23,7 +23,7 @@ class Main:
             else:
                 found, settings = self._read_file()
                 self._set_properties(settings)
-        except Exception, e:
+        except Exception as e:
             common.dbg_log('Main::__init__', 'ERROR: (' + repr(e) + ')', common.logErorr)
 
     def _parse_argv(self):
@@ -36,7 +36,7 @@ class Main:
             self.PROPERTY = params.get("property", "")
             self.ISRADIO = params.get("isradio", 0)
             self.CHANNELID = params.get("channelid", 0)
-        except Exception, e:
+        except Exception as e:
             common.dbg_log('Main::_parse_argv', 'ERROR: (' + repr(e) + ')', common.logErorr)
 
     def _read_file(self):
@@ -50,13 +50,13 @@ class Main:
                 found = False
                 settings = []
             return found, settings
-        except Exception, e:
+        except Exception as e:
             common.dbg_log('Main::_read_file', 'ERROR: (' + repr(e) + ')', common.logErorr)
 
     def _play_channels(self, vChannelID):
         try:
              xbmc.executeJSONRPC('{ "jsonrpc": "2.0", "id": 0, "method": "Player.Open", "params": { "item": { "channelid": ' + vChannelID + ' } } }')
-        except Exception, e:
+        except Exception as e:
             common.dbg_log('Main::_play_channels', 'ERROR: (' + repr(e) + ')', common.logErorr)
 
     def _set_properties(self, listing):
@@ -78,7 +78,7 @@ class Main:
                         strTitle = channel_details['result']['channeldetails']['broadcastnow']['title']
 
                     self.WINDOW.setProperty(aname[0]+'.'+aname[1]+'.Title' , strTitle)
-        except Exception, e:
+        except Exception as e:
             common.dbg_log('Main::_set_properties', 'ERROR: (' + repr(e) + ')', common.logErorr)
 
 def ShowDialog(vRadio, vProperty):
@@ -86,5 +86,5 @@ def ShowDialog(vRadio, vProperty):
         dlg = gui.SelectChannels('DialogSelect.xml',xbmcaddon.Addon().getAddonInfo('path').decode('utf-8'), isradio=vRadio, property=vProperty)
         dlg.doModal()
         del dlg
-    except Exception, e:
+    except Exception as e:
         common.dbg_log('ShowDialog', 'ERROR: (' + repr(e) + ')', common.logErorr)

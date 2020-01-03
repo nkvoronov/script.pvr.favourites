@@ -21,7 +21,7 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
             self.C_MAIN_CANCEL_BUTTON1=7
             self.C_MAIN_CANCEL_BUTTON2=99
 
-        except Exception, e:
+        except Exception as e:
             common.dbg_log('SelectChannels::__init__', 'ERROR: (' + repr(e) + ')', common.logErorr)
 
     def onInit(self):
@@ -33,7 +33,7 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
                 print_exc()
                 self.ChannelList = self.getControl(self.C_MAIN_LIST1)
 
-            self.getControl(self.C_MAIN_HEADER).setLabel(common.Lang(32000+int(self.isRadio)))
+            self.getControl(self.C_MAIN_HEADER).setLabel(common.Lang(32000 + int(self.isRadio)))
             self.getControl(self.C_MAIN_CANCEL_BUTTON1).setLabel(common.Lang(32004))
             self.getControl(self.C_MAIN_OK_BUTTON).setVisible(False)
 
@@ -47,7 +47,7 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
 
             channels_list = common.get_channels_json_response(self.isRadio)
 
-            if channels_list.has_key('result') and channels_list['result'].has_key('channels') and channels_list['result']['channels'] is not None:
+            if 'result' in channels_list and 'channels' in channels_list['result'] and channels_list['result']['channels'] is not None:
                 for item in channels_list['result']['channels']:
                     lstItem = xbmcgui.ListItem(item['label'])
                     if item['channeltype'] == 'tv':
@@ -66,14 +66,14 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
 
             self.setFocus(self.ChannelList)
 
-        except Exception, e:
+        except Exception as e:
             common.dbg_log('SelectChannels::onInit', 'ERROR: (' + repr(e) + ')', common.logErorr)
 
     def onAction(self, action):
         try:
             if action.getId() in (9, 10, 92, 216, 247, 257, 275, 61467, 61448,):
                 self.close()
-        except Exception, e:
+        except Exception as e:
             common.dbg_log('SelectChannels::onAction', 'ERROR: (' + repr(e) + ')', common.logErorr)
 
     def onClick(self, controlID):
@@ -101,7 +101,7 @@ class SelectChannels(xbmcgui.WindowXMLDialog):
             if controlID == self.C_MAIN_CANCEL_BUTTON1 or controlID == self.C_MAIN_CANCEL_BUTTON2:
                 self.close()
 
-        except Exception, e:
+        except Exception as e:
             common.dbg_log('SelectChannels::onClick', 'ERROR: (' + repr(e) + ')', common.logErorr)
 
     def onFocus(self, controlID):
