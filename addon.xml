@@ -2,7 +2,7 @@
 <addon
 	id="script.pvr.favourites"
 	name="PVR favourites"
-	version="2.1.3"
+	version="2.1.4"
 	provider-name="YLLOW_DRAGON">
 	<requires>
 		<import addon="xbmc.python" version="3.0.0"/>
@@ -20,5 +20,8 @@
 		<platform>all</platform>
 		<email>nkvoronov@gmail.com</email>
 		<source>https://github.com/nkvoronov/script.pvr.favourites.git</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+		</assets>
 	</extension>
 </addon>
