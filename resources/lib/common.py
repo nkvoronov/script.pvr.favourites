@@ -3,6 +3,7 @@
 import os
 import sys
 import xbmc
+import xbmcvfs
 import xbmcaddon
 import xbmcgui
 
@@ -17,8 +18,8 @@ __scriptid__ = 'script.pvr.favourites'
 __addon__ = xbmcaddon.Addon(__scriptid__)
 __cwd__ = __addon__.getAddonInfo('path')
 __common__ = sys.modules[globals()['__name__']]
-__resources__ = xbmc.translatePath(os.path.join(__cwd__, 'resources'))
-__resources_lib__ = xbmc.translatePath(os.path.join(__resources__, 'lib'))
+__resources__ = xbmcvfs.translatePath(os.path.join(__cwd__, 'resources'))
+__resources_lib__ = xbmcvfs.translatePath(os.path.join(__resources__, 'lib'))
 
 debug = 'true'
 logErorr = xbmc.LOGERROR

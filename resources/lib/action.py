@@ -41,7 +41,7 @@ class Main:
 
     def _read_file(self):
         try:
-            self.settings_file = xbmc.translatePath('special://profile/addon_data/'+xbmc.getSkinDir()+'/settings.xml').decode("utf-8")
+            self.settings_file = xbmcvfs.translatePath('special://profile/addon_data/'+xbmc.getSkinDir()+'/settings.xml').decode("utf-8")
             if xbmcvfs.exists(self.settings_file):
                 found = True
                 self.doc = parse(self.settings_file)
