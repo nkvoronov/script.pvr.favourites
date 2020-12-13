@@ -30,7 +30,7 @@ sys.path.append(__resources_lib__)
 def Lang(vcode):
     return __addon__.getLocalizedString(vcode)
 
-def dbg_log(vsource, vtext, vlevel=xbmc.LOGNOTICE):
+def dbg_log(vsource, vtext, vlevel=xbmc.LOGINFO):
     if debug == 'false':
         return
     xbmc.log('## '+__scriptname__+' ## ' + vsource + ' ## ' + vtext, vlevel)
